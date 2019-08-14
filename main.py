@@ -2,10 +2,16 @@
 
 from PIL import Image
 from math import *
+import sys
 
 #Loading image and converting to "L" mode (greyscale)
-im = Image.open("ets.jpeg").convert("L")
+if(len(sys.argv) > 1) :
+  im = Image.open(sys.argv[1]+"."+sys.argv[2]).convert("L")
+else:
+  im = Image.open("ets.jpeg").convert("L")
+
 (w, h) = im.size
+
 im_out = Image.new("L",im.size)
 imx_out = Image.new("L",im.size)
 imy_out = Image.new("L",im.size)
@@ -43,7 +49,10 @@ for i in range(1,w-1):
     imxy_out.putpixel((i,j),int(sqrt(valuex**2+valuey**2)/sqrt(2)))
     
 #im_out.show()
-im_out.save("ets_edges.jpeg","jpeg")
-imx_out.save("ets_edges_x.jpeg","jpeg")
-imy_out.save("ets_edges_y.jpeg","jpeg")
-imxy_out.save("ets_edges_xy.jpeg","jpeg")
+if(len(sys.argv)>1):
+  im_out.save("edges_"+str(sys.argv[1])+".jpeg","jpeg")
+else:
+  im_out.save("ets_edges.jpeg","jpeg")
+  imx_out.save("ets_edges_x.jpeg","jpeg")
+  imy_out.save("ets_edges_y.jpeg","jpeg")
+  imxy_out.save("ets_edges_xy.jpeg","jpeg")
