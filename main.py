@@ -2,6 +2,7 @@
 
 from PIL import Image
 
+#Loading image and converting to "L" mode (greyscale)
 im = Image.open("ets.jpeg").convert("L")
 (w, h) = im.size
 im_out = Image.new("L",im.size)
