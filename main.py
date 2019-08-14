@@ -50,7 +50,7 @@ for i in range(1,w-1):
     imxy_out.putpixel((i,j),int(sqrt(valuex**2+valuey**2)/sqrt(2)))
     
 #im_out.show()
-im_out.save(path+"/edges_"+bare_name+".jpeg","jpeg")
-imx_out.save(path+"/edges_x_"+bare_name+".jpeg","jpeg")
-imy_out.save(path+"/edges_y_"+bare_name+".jpeg","jpeg")
-imxy_out.save(path+"/edges_xy_"+bare_name+".jpeg","jpeg")
+im_out.save(path+os.sep+bare_name+"_edge.jpeg","jpeg")
+imx_out.save(path+os.sep+bare_name+"_edge_x.jpeg","jpeg")
+imy_out.save(path+os.sep+bare_name+"_edge_y.jpeg","jpeg")
+imxy_out.save(path+os.sep+bare_name+"_edge_xy.jpeg","jpeg")
