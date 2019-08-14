@@ -1,5 +1,7 @@
 # sobel
 
+Edge detection using sobel operators [https://en.wikipedia.org/wiki/Sobel_operator]
+
 Usage: ./main.py img_name_without_extension extension
 
 ![GitHub Logo](images/ets.jpeg)
