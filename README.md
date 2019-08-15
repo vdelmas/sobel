@@ -2,9 +2,9 @@
 
 # <h2> Overview 
 ![GitHub Logo](images/ets.jpeg)
-![GitHub Logo](images/ets_edges_x.jpeg)
-![GitHub Logo](images/ets_edges_y.jpeg)
-![GitHub Logo](images/ets_edges_xy.jpeg)
+![GitHub Logo](images/edges_x_ets.jpeg)
+![GitHub Logo](images/edges_y_ets.jpeg)
+![GitHub Logo](images/edges_z_ets.jpeg)
 
 # <h2> Usage
 Usage: ./main.py img_name
