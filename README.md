@@ -4,7 +4,7 @@
 ![GitHub Logo](images/ets.jpeg)
 ![GitHub Logo](images/edges_x_ets.jpeg)
 ![GitHub Logo](images/edges_y_ets.jpeg)
-![GitHub Logo](images/edges_z_ets.jpeg)
+![GitHub Logo](images/edges_xy_ets.jpeg)
 
 # <h2> Usage
 Usage: ./main.py img_name
