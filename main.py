@@ -7,6 +7,7 @@ import sys
 
 #Loading image and converting to "L" mode (greyscale)
 path, name = os.path.split(sys.argv[1])
+path = os.getcwd() + path
 bare_name = name.split(".")[0]
 im = Image.open(sys.argv[1]).convert("L")
 
