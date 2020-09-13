@@ -1,57 +1,39 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.8
 
 from PIL import Image
 from math import *
+import numpy as np
 import os
 import sys
+import sobel_module
 
 #Loading image and converting to "L" mode (greyscale)
 path, name = os.path.split(sys.argv[1])
 path = os.getcwd() + os.sep + path
 bare_name = name.split(".")[0]
 im = Image.open(sys.argv[1]).convert("L")
+imar = np.asfortranarray(im, dtype=np.int32)
+print(imar.shape)
+print(type(imar[0][0]))
 
 (w, h) = im.size
-print(w,h)
 
-im_out = Image.new("L",im.size)
 imx_out = Image.new("L",im.size)
+imarx_out = np.zeros((h,w),dtype=np.int32,order='F')
+
 imy_out = Image.new("L",im.size)
+imary_out = np.copy(imar)
+imary_out = np.zeros((h,w),dtype=np.int32,order='F')
+
 imxy_out = Image.new("L",im.size)
+imarxy_out = np.zeros((h,w),dtype=np.int32,order='F')
 
-for i in range(1,w-1):
-  for j in range(1,h-1):
-    #Formule ?
-    value = 2*im.getpixel((i-1,j))
-    value += im.getpixel((i-1,j))
-    value += im.getpixel((i+1,j))
-    value -= 2*im.getpixel((i,j-1))
-    value -= im.getpixel((i,j+1))
-    value -= im.getpixel((i,j-1))
-    im_out.putpixel((i,j),value)
+sobel_module.sobel(h, w, imar, imarx_out, imary_out, imarxy_out)
 
-    #Formule gradient sobel x
-    valuex = 2*im.getpixel((i,j-1))
-    valuex += im.getpixel((i-1,j-1))
-    valuex += im.getpixel((i+1,j-1))
-    valuex -= 2*im.getpixel((i,j+1))
-    valuex -= im.getpixel((i-1,j+1))
-    valuex -= im.getpixel((i+1,j+1))
-    imx_out.putpixel((i,j),valuex)
-
-    #Formule gradient sobel y
-    valuey = 2*im.getpixel((i-1,j))
-    valuey += im.getpixel((i-1,j+1))
-    valuey += im.getpixel((i-1,j-1))
-    valuey -= 2*im.getpixel((i+1,j))
-    valuey -= im.getpixel((i+1,j+1))
-    valuey -= im.getpixel((i+1,j-1))
-    imy_out.putpixel((i,j),valuey)
-
-    imxy_out.putpixel((i,j),int(sqrt(valuex**2+valuey**2)/sqrt(2)))
+imx_out = Image.fromarray(np.ascontiguousarray(np.uint8(imarx_out)),mode="L")
+imy_out = Image.fromarray(np.ascontiguousarray(np.uint8(imary_out)),mode="L")
+imxy_out = Image.fromarray(np.ascontiguousarray(np.uint8(imarxy_out)),mode="L")
     
-#im_out.show()
-im_out.save(path+os.sep+bare_name+"_edge.jpeg","jpeg")
 imx_out.save(path+os.sep+bare_name+"_edge_x.jpeg","jpeg")
 imy_out.save(path+os.sep+bare_name+"_edge_y.jpeg","jpeg")
 imxy_out.save(path+os.sep+bare_name+"_edge_xy.jpeg","jpeg")
